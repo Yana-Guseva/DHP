@@ -17,7 +17,7 @@ public class DHPAlgorithmLoadTest extends DHPLoadTest{
 		System.out.println("----- DHPAlgoritm -------");
 		
 //		for(int i=0; i < dataSets.length; i++){
-			setSettings(4);
+			setSettings(5);
 		
 			DHPAlgorithm algorithm = new DHPAlgorithm(miningSettings);
 			System.out.println("Start algorithm");

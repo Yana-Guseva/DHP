@@ -53,7 +53,7 @@ public class ParallelDHPAlgorithm extends MiningAlgorithm{
 		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings, 
 				new ParallelByData(miningSettings, new StepSequence(miningSettings, 
 				new PruningStep(miningSettings),
-				new GetLargeItemSetsStep(miningSettings),
+//				new GetLargeItemSetsStep(miningSettings),
 //				new K_1LargeItemSetsCycleStep(miningSettings, new K_1LargeItemSetsFromCurrentCycleStep(miningSettings,
 //						new CreateKItemSetCandidateStepUsingHashTable(miningSettings))),
 				new TransactionsCycleStep(miningSettings, 

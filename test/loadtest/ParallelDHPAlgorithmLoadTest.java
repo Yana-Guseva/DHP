@@ -13,7 +13,7 @@ import org.eltech.ddm.miningcore.miningfunctionsettings.MiningModelProcessingStr
 import org.eltech.ddm.miningcore.miningtask.EMiningBuildTask;
 import org.junit.Test;
 
-public class ParallelDHPAlgorithmLodTest extends DHPLoadTest{
+public class ParallelDHPAlgorithmLoadTest extends DHPLoadTest{
 private final int NUMBER_HANDLERS = 2;
 	
 	@Test
@@ -22,7 +22,7 @@ private final int NUMBER_HANDLERS = 2;
 		
 		try{
 //			for(int i=0; i < dataSets.length; i++){
-				setSettings(0);
+				setSettings(3);
 			
 				miningSettings.getAlgorithmSettings().setDataSplitType(DataSplitType.block);
 				miningSettings.getAlgorithmSettings().setDataProcessingStrategy(DataProcessingStrategy.SeparatedDataSet);

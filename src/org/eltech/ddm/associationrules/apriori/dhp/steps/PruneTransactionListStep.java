@@ -25,14 +25,16 @@ public class PruneTransactionListStep extends Step{
 		TransactionList transactionList = modelA.getTransactionList();
 //		System.out.println(Thread.currentThread().getName() + " " + transactionList);
 		Transaction transaction = transactionList.get(modelA.getCurrentTransaction());
-		int index = modelA.getCurrentLargeItemSets() + 1;
+		int index = modelA.getCurrentLargeItemSets();
 		Map<List<String>, Integer> map = modelA.getItemSetsHashTable().get(index);
-		if (isNeedPrune(map, transaction, index)) {
-			removeTransaction(transaction, transactionList);
-			modelA.setCurrentTransaction(modelA.getCurrentTransaction() - 1); 
-			modelA.setTransactionPruned(true);
-		} else {
-			modelA.setTransactionPruned(false);
+		if (map != null) {
+			if (isNeedPrune(map, transaction, index)) {
+				removeTransaction(transaction, transactionList);
+				modelA.setCurrentTransaction(modelA.getCurrentTransaction() - 1); 
+				modelA.setTransactionPruned(true);
+			} else {
+				modelA.setTransactionPruned(false);
+			}
 		}
 		
 		return modelA;
