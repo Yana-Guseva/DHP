@@ -8,8 +8,6 @@ import org.eltech.ddm.miningcore.miningfunctionsettings.EMiningFunctionSettings;
 import org.eltech.ddm.miningcore.miningmodel.EMiningModel;
 
 public class IsThereCurrentTransaction extends DecisionStep{
-
-	
 	
 	public IsThereCurrentTransaction(EMiningFunctionSettings settings, CreateHashTable createHashTable) throws MiningException {
 		super(settings, createHashTable);
@@ -19,6 +17,4 @@ public class IsThereCurrentTransaction extends DecisionStep{
 	protected boolean condition(MiningInputStream inputData, EMiningModel model) throws MiningException {
 		return (!((DHPMiningModel)model).isTransactionPruned());
 	}
-
-
 }

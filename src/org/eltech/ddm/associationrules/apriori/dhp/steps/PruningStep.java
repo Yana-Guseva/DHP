@@ -26,7 +26,6 @@ public class PruningStep extends Step{
 	protected EMiningModel execute(MiningInputStream inputData, EMiningModel model) throws MiningException {
 		DHPMiningModel modelA = (DHPMiningModel) model;
 		Map<List<String>, Integer> map = modelA.getItemSetsHashTable().get(modelA.getCurrentLargeItemSets() + 1);
-//		System.out.println(Thread.currentThread().getName() + " " + map);
 		ItemSets currItemsetList = null;
 		if(modelA.getLargeItemSetsList().size() <= (modelA.getCurrentLargeItemSets())){
 			currItemsetList = new ItemSets();
@@ -34,7 +33,7 @@ public class PruningStep extends Step{
 		} else
 			currItemsetList = modelA.getLargeItemSetsList().get(modelA.getCurrentLargeItemSets());
 		if (map != null) {
-			Iterator it = map.keySet().iterator();
+			Iterator<List<String>> it = map.keySet().iterator();
 			while (it.hasNext()){
 				List<String> items = (List<String>) it.next();
 				if(((double) map.get(items) / (double)modelA.getTransactionCount()) < minSupport){
@@ -46,8 +45,6 @@ public class PruningStep extends Step{
 				}
 			}
 		}
-//		System.out.println("large " + Thread.currentThread().getName() + " " + modelA.getLargeItemSetsList().get(modelA.getCurrentLargeItemSets()));
-//		System.out.println(Thread.currentThread().getName() + " " + map);
 		return modelA;
 	}
 

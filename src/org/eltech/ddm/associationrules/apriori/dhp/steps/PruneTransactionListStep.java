@@ -23,7 +23,6 @@ public class PruneTransactionListStep extends Step{
 	protected EMiningModel execute(MiningInputStream inputData, EMiningModel model) throws MiningException {
 		DHPMiningModel modelA = (DHPMiningModel) model;
 		TransactionList transactionList = modelA.getTransactionList();
-//		System.out.println(Thread.currentThread().getName() + " " + transactionList);
 		Transaction transaction = transactionList.get(modelA.getCurrentTransaction());
 		int index = modelA.getCurrentLargeItemSets();
 		Map<List<String>, Integer> map = modelA.getItemSetsHashTable().get(index);
@@ -40,7 +39,7 @@ public class PruneTransactionListStep extends Step{
 		return modelA;
 	}
 	
-	public boolean isNeedPrune(Map map, Transaction transaction, int k) {
+	public boolean isNeedPrune(Map<List<String>, Integer> map, Transaction transaction, int k) {
 		List<String> transactionItemIDList = transaction.getItemIDList();
 		if (transactionItemIDList.size() < k) {
 			return true;
@@ -83,8 +82,6 @@ public class PruneTransactionListStep extends Step{
 	}
 	
 	private boolean removeTransaction(Transaction transaction, TransactionList transactionList) {
-//		System.out.println("remove " + transaction);
-//		System.out.println("transactionList " + transactionList);
 		return transactionList.remove(transaction);
 	}
 

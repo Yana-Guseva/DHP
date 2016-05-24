@@ -2,8 +2,6 @@ package org.eltech.ddm.associationrules.apriori.dhp;
 
 import org.eltech.ddm.associationrules.AssociationRulesFunctionSettings;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.CreateHashTable;
-import org.eltech.ddm.associationrules.apriori.dhp.steps.CreateKItemSetCandidateStepUsingHashTable;
-import org.eltech.ddm.associationrules.apriori.dhp.steps.GetLargeItemSetsStep;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.IsThereCurrentTransaction;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.PruneTransactionListStep;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.PruningStep;
@@ -13,8 +11,6 @@ import org.eltech.ddm.associationrules.apriori.steps.Calculate1ItemSetSupportSte
 import org.eltech.ddm.associationrules.apriori.steps.CreateLarge1ItemSetStep;
 import org.eltech.ddm.associationrules.apriori.steps.GenerateAssosiationRuleStep;
 import org.eltech.ddm.associationrules.apriori.steps.KLargeItemSetsCycleStep;
-import org.eltech.ddm.associationrules.apriori.steps.K_1LargeItemSetsCycleStep;
-import org.eltech.ddm.associationrules.apriori.steps.K_1LargeItemSetsFromCurrentCycleStep;
 import org.eltech.ddm.associationrules.apriori.steps.LargeItemSetItemsCycleStep;
 import org.eltech.ddm.associationrules.apriori.steps.LargeItemSetListsCycleStep;
 import org.eltech.ddm.associationrules.apriori.steps.TransactionItemsCycleStep;
@@ -54,9 +50,6 @@ public class DHPAlgorithm extends MiningAlgorithm{
 		
 		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings, 
 				new PruningStep(miningSettings),
-//				new GetLargeItemSetsStep(miningSettings),
-//				new K_1LargeItemSetsCycleStep(miningSettings, new K_1LargeItemSetsFromCurrentCycleStep(miningSettings,
-//						new CreateKItemSetCandidateStepUsingHashTable(miningSettings))),
 				new TransactionsCycleStep(miningSettings, 
 					new PruneTransactionListStep(miningSettings),
 						new IsThereCurrentTransaction(miningSettings, new CreateHashTable(miningSettings))));

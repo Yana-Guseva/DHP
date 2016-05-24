@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eltech.ddm.associationrules.ItemSet;
 import org.eltech.ddm.associationrules.Transaction;
 import org.eltech.ddm.associationrules.TransactionList;
 import org.eltech.ddm.associationrules.apriori.dhp.DHPMiningModel;
@@ -26,22 +25,18 @@ public class CreateHashTable extends Step{
 	protected EMiningModel execute(MiningInputStream inputData, EMiningModel model) throws MiningException {
 		DHPMiningModel modelA = (DHPMiningModel) model;
 		TransactionList transactionList = modelA.getTransactionList();
-//		System.out.println(Thread.currentThread().getName() + " " + transactionList);
 		Transaction transaction = transactionList.get(modelA.getCurrentTransaction());
-//		System.out.println("transaction " + transaction);
 		int index = modelA.getCurrentLargeItemSets() + 2;
 		if (!modelA.getItemSetsHashTable().containsKey(index)) {
 			modelA.getItemSetsHashTable().put(index, new HashMap<List<String>, Integer>());
 		}
-//		System.out.println(Thread.currentThread().getName() + " " + "tran " + transaction);
 		
 		Map<List<String>, Integer> map = modelA.getItemSetsHashTable().get(index);
-		getTransactionSubsets(map, transaction, index);
-//		System.out.println(Thread.currentThread().getName() + " " + map);
+		createSubsets(map, transaction, index);
 		return modelA;
 	}
 
-	public void getTransactionSubsets(Map<List<String>, Integer> map, Transaction transaction, int k) {
+	public void createSubsets(Map<List<String>, Integer> map, Transaction transaction, int k) {
 		List<String> transactionItemIDList = transaction.getItemIDList();
 		if (transactionItemIDList.size() < k) {
 			return;
@@ -60,10 +55,8 @@ public class CreateHashTable extends Step{
 			}
 			elements.sort(null);
 			if (map.containsKey(elements)) {
-//				System.out.println("add " + elements);
 				map.put(elements, map.get(elements) + 1);
 			} else {
-//				System.out.println("add " + elements);
 				map.put(elements, 1);
 			}
 			int n = 1;

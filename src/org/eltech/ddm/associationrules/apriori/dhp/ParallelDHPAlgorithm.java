@@ -2,7 +2,6 @@ package org.eltech.ddm.associationrules.apriori.dhp;
 
 import org.eltech.ddm.associationrules.AssociationRulesFunctionSettings;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.CreateHashTable;
-import org.eltech.ddm.associationrules.apriori.dhp.steps.GetLargeItemSetsStep;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.IsThereCurrentTransaction;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.PruneTransactionListStep;
 import org.eltech.ddm.associationrules.apriori.dhp.steps.PruningStep;
@@ -50,16 +49,23 @@ public class ParallelDHPAlgorithm extends MiningAlgorithm{
 				new CreateHashTable(miningSettings));
 		tcs.addListenerExecute(new StepExecuteTimingListner());
 		
-		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings, 
-				new ParallelByData(miningSettings, new StepSequence(miningSettings, 
+		StepSequence ss = new StepSequence(miningSettings, 
 				new PruningStep(miningSettings),
-//				new GetLargeItemSetsStep(miningSettings),
-//				new K_1LargeItemSetsCycleStep(miningSettings, new K_1LargeItemSetsFromCurrentCycleStep(miningSettings,
-//						new CreateKItemSetCandidateStepUsingHashTable(miningSettings))),
 				new TransactionsCycleStep(miningSettings, 
 					new PruneTransactionListStep(miningSettings),
-						new IsThereCurrentTransaction(miningSettings, new CreateHashTable(miningSettings))))));
+						new IsThereCurrentTransaction(miningSettings, new CreateHashTable(miningSettings))));
+		
+		ss.addListenerExecute(new StepExecuteTimingListner());
+		
+		ParallelByData pbd = new ParallelByData(miningSettings, ss);
+		pbd.addListenerExecute(new StepExecuteTimingListner());
+
+		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings, pbd);
 		lislcs.addListenerExecute(new StepExecuteTimingListner());
+		
+//		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings, 
+//				new ParallelByData(miningSettings, ss));
+//		lislcs.addListenerExecute(new StepExecuteTimingListner());
 
 		LargeItemSetListsCycleStep lislcs2 = new LargeItemSetListsCycleStep(miningSettings, new KLargeItemSetsCycleStep(
 				miningSettings,

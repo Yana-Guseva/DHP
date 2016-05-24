@@ -58,9 +58,7 @@ public class DHPMiningModel extends AprioriMiningModel{
 			if(mm == this)
 				continue;
 			DHPMiningModel dhpmm = (DHPMiningModel) mm;
-//			System.out.println("index " + index);
 			Map<List<String>, Integer> map = dhpmm.getItemSetsHashTable().get(index);
-//			System.out.println("map " + map);
 			if (map != null) {
 				if (!itemSetsHashTable.containsKey(index)) {
 					itemSetsHashTable.put(index, new HashMap<List<String>, Integer>());
@@ -78,17 +76,13 @@ public class DHPMiningModel extends AprioriMiningModel{
 			}
 			
 			ItemSets curList = dhpmm.getLargeItemSetsList().get(getCurrentLargeItemSets());
-//			System.out.println(dhpmm.getLargeItemSetsList());
-//			System.out.println("curList " + curList);
 			if (curList.size() > 0) {
-//				System.out.println("here");
 				int k = curList.size();
 				if(getCurrentLargeItemSets() >= largeItemSetsList.size())
 					largeItemSetsList.add(new ItemSets());
 				largeItemSetsList.get(getCurrentLargeItemSets()).addAll(curList);
 			}
 		}
-//		System.out.println("join " + largeItemSetsList);
 	}
 	
 	@Override
@@ -96,9 +90,7 @@ public class DHPMiningModel extends AprioriMiningModel{
 			throws MiningException {
 		ArrayList<EMiningModel> models = super.split(handlerCount);
 		int index = getCurrentLargeItemSets() + 1;
-//		System.out.println("index " + index);
 		Map<List<String>, Integer> map = itemSetsHashTable.get(index);
-//		System.out.println("split " + map);
 
 		
 		if (map != null && map.size() > 0) {
@@ -124,10 +116,6 @@ public class DHPMiningModel extends AprioriMiningModel{
 					i++;
 				}
 			}
-//			int count = (map.size() / handlerCount) % 1 == 0 ? map.size() / handlerCount : Math.round(map.size() / handlerCount) + 1;
-			
-//			System.out.println("0 " + ((DHPMiningModel) models.get(0)).getItemSetsHashTable().get(index));
-//			System.out.println("1 " + ((DHPMiningModel) models.get(1)).getItemSetsHashTable().get(index));
 		}
 
 		return models;

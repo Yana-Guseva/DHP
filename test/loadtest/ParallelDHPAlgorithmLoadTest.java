@@ -22,7 +22,7 @@ private final int NUMBER_HANDLERS = 2;
 		
 		try{
 //			for(int i=0; i < dataSets.length; i++){
-				setSettings(3);
+				setSettings(8);
 			
 				miningSettings.getAlgorithmSettings().setDataSplitType(DataSplitType.block);
 				miningSettings.getAlgorithmSettings().setDataProcessingStrategy(DataProcessingStrategy.SeparatedDataSet);
